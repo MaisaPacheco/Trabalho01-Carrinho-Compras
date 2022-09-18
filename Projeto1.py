@@ -1,6 +1,3 @@
-from itertools import count
-import os
-from tkinter.tix import NoteBook
 from fastapi import FastAPI
 from typing import List
 from pydantic import BaseModel
@@ -21,7 +18,7 @@ FALHA = "FALHA"
 # Classe representando os dados do endereço do cliente
 class Endereco(BaseModel):
     rua: str
-    cep: int
+    cep: str
     cidade: str
     estado: str
 
