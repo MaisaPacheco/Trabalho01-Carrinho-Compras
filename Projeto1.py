@@ -65,7 +65,7 @@ db_carrinhos = {}
 # senha tem que ser maior ou igual a 3 caracteres, 
 # senão retornar OK
 @app.post("/usuario/")
-def criar_usuário(usuario: Usuario):
+def criar_usuario(usuario: Usuario):
     if usuario.id in db_usuarios:
         return FALHA
     elif not "@" in usuario.email:
@@ -82,7 +82,8 @@ def criar_usuário(usuario: Usuario):
 async def retornar_usuario(id: int):
     if id in db_usuarios:
         return db_usuarios[id]
-    return FALHA
+    if id not in db_usuarios:
+        return FALHA
 
 
 # Se existir um usuário com exatamente o mesmo nome, retornar os dados do usuário
