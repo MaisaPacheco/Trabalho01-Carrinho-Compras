@@ -88,14 +88,13 @@ async def retornar_usuario(id: int):
 
 # Se existir um usuário com exatamente o mesmo nome, retornar os dados do usuário
 # senão retornar falha
-@app.get("/usuario/{nome}")
-async def retornar_usuario_com_nome(nome: str):
-    if nome in db_usuarios:
-        return db_usuarios[nome]
+@app.get("/usuario/{id_usuario}")
+async def retornar_usuario(id_usuario: str):
+    if id_usuario in db_usuarios:
+        return db_usuarios[id_usuario]
     else:
         return FALHA
-
-
+    
 # Se o id do usuário existir, deletar o usuário e retornar OK
 # senão retornar falha
 # ao deletar o usuário, deletar também endereços e carrinhos vinculados a ele
@@ -150,11 +149,10 @@ async def retornar_emails(dominio: str):
 async def criar_endereco(id_usuario: int, endereco: Endereco):
     if id_usuario not in db_usuarios:
         return FALHA
-    if id_usuario not in db_end:
-        lista_end='Endereços_Usuário'()
-        lista_end.usuario=db_usuarios[id_usuario]
-        return OK
-        
+    db_end[id_usuario] = endereco
+    return OK
+
+#chave do usuario pra guardar o endereço        
 
 # Se não existir endereço com o id_endereco retornar falha, 
 # senão deleta endereço correspondente ao id_endereco e retornar OK
